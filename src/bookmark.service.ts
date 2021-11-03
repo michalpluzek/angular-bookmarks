@@ -4,6 +4,8 @@ import "rxjs/add/operator/toPromise";
 
 @Injectable()
 export class BookmarkService {
+  errorHandler = (error) => console.error("BookmarkService error", error);
+
   private baseUrl =
     "https://angular2-test-bec85-default-rtdb.europe-west1.firebasedatabase.app/";
 
@@ -13,7 +15,8 @@ export class BookmarkService {
     const bookmarkJSON = JSON.stringify(bookmark);
     return this.http
       .post(`${this.baseUrl}bookmarks.json`, bookmarkJSON)
-      .toPromise();
+      .toPromise()
+      .catch(this.errorHandler);
   }
 
   updateBookmark(bookmark) {
@@ -23,20 +26,23 @@ export class BookmarkService {
     });
     return this.http
       .patch(`${this.baseUrl}bookmarks/${bookmark.id}.json`, bookmarkJSON)
-      .toPromise();
+      .toPromise()
+      .catch(this.errorHandler);
   }
 
   getBookmarks() {
     return this.http
       .get(`${this.baseUrl}bookmarks.json`)
       .toPromise()
-      .then((response) => this.convertAfterGET(response.json()));
+      .then((response) => this.convertAfterGET(response.json()))
+      .catch(this.errorHandler);
   }
 
   removeBookmark(bookmark) {
     return this.http
       .delete(`${this.baseUrl}bookmarks/${bookmark.id}.json`)
-      .toPromise();
+      .toPromise()
+      .catch(this.errorHandler);
   }
 
   private convertAfterGET(responseToConvert) {

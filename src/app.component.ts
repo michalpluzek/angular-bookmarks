@@ -21,6 +21,8 @@ export class AppComponent {
   editableBookmark = {};
 
   constructor(private bookmarksService: BookmarkService) {
+    bookmarksService.errorHandler = (error) =>
+      window.alert("Serwer nie odpowiada");
     this.reload();
   }
 
