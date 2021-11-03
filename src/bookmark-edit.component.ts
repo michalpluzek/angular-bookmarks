@@ -24,7 +24,7 @@ import { Bookmark } from "./bookmark.model";
   `,
 })
 export class BookmarkEditComponent {
-  bookmark = {};
+  bookmark: Bookmark = { title: "", url: "" };
 
   @Output() save = new EventEmitter();
 

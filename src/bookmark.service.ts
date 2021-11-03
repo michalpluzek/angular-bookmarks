@@ -23,6 +23,12 @@ export class BookmarkService {
       .then((response) => this.convert(response.json()));
   }
 
+  removeBookmark(bookmark) {
+    return this.http
+      .delete(`${this.baseUrl}bookmarks/${bookmark.id}.json`)
+      .toPromise();
+  }
+
   private convert(responseToConvert) {
     return Object.keys(responseToConvert)
       .map((id) => ({
