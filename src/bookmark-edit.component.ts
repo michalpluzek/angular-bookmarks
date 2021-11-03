@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Output } from "@angular/core";
-import { Bookmark } from "./bookmark.model";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
   selector: "bookmark-edit",
@@ -24,7 +23,7 @@ import { Bookmark } from "./bookmark.model";
   `,
 })
 export class BookmarkEditComponent {
-  bookmark: Bookmark = { title: "", url: "" };
+  @Input() bookmark = {};
 
   @Output() save = new EventEmitter();
 

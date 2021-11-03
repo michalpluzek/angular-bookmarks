@@ -16,11 +16,21 @@ export class BookmarkService {
       .toPromise();
   }
 
+  updateBookmark(bookmark) {
+    const bookmarkJSON = JSON.stringify({
+      title: bookmark.title,
+      url: bookmark.url,
+    });
+    return this.http
+      .patch(`${this.baseUrl}bookmarks/${bookmark.id}.json`, bookmarkJSON)
+      .toPromise();
+  }
+
   getBookmarks() {
     return this.http
       .get(`${this.baseUrl}bookmarks.json`)
       .toPromise()
-      .then((response) => this.convert(response.json()));
+      .then((response) => this.convertAfterGET(response.json()));
   }
 
   removeBookmark(bookmark) {
@@ -29,7 +39,7 @@ export class BookmarkService {
       .toPromise();
   }
 
-  private convert(responseToConvert) {
+  private convertAfterGET(responseToConvert) {
     return Object.keys(responseToConvert)
       .map((id) => ({
         id: id,

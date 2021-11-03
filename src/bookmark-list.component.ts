@@ -1,5 +1,4 @@
 import { Component, Input, EventEmitter, Output } from "@angular/core";
-import { Bookmark } from "./bookmark.model";
 
 @Component({
   selector: "bookmark-list",
@@ -11,6 +10,9 @@ import { Bookmark } from "./bookmark.model";
             <a [href]="bookmark.url" target="_blank"> {{ bookmark.title }}</a>
           </td>
           <td>
+            <button (click)="onEdit(bookmark)" class="btn btn-warning">
+              Edytuj
+            </button>
             <button (click)="onRemove(bookmark)" class="btn btn-danger">
               Usuń
             </button>
@@ -21,10 +23,15 @@ import { Bookmark } from "./bookmark.model";
   `,
 })
 export class BookmarkListComponent {
-  @Input() bookmarks: Bookmark[];
+  @Input() bookmarks = [];
   @Output() remove = new EventEmitter();
+  @Output() edit = new EventEmitter();
 
   onRemove(bookmark) {
     this.remove.emit(bookmark);
+  }
+
+  onEdit(bookmark) {
+    this.edit.emit(bookmark);
   }
 }

@@ -1,32 +1,45 @@
 import { Component } from "@angular/core";
-import { Bookmark } from "./bookmark.model";
 import { BookmarkService } from "./bookmark.service";
 
 @Component({
   selector: "bookmark-app",
   template: `
-    <bookmark-edit (save)="save($event)"></bookmark-edit>
+    <bookmark-edit
+      [bookmark]="editableBookmark"
+      (save)="save($event)"
+    ></bookmark-edit>
     <bookmark-list
-      (remove)="remove($event)"
       [bookmarks]="bookmarks"
+      (remove)="remove($event)"
+      (edit)="edit($event)"
     ></bookmark-list>
   `,
 })
 export class AppComponent {
-  bookmarks: Bookmark[];
+  bookmarks = [];
+  editableBookmark = {};
 
   constructor(private bookmarksService: BookmarkService) {
     this.reload();
   }
 
   save(bookmark) {
-    this.bookmarksService.addBookmark(bookmark).then(() => this.reload());
+    if (bookmark.id) {
+      this.bookmarksService.updateBookmark(bookmark).then(() => this.reload());
+    } else {
+      this.bookmarksService.addBookmark(bookmark).then(() => this.reload());
+    }
+    this.editableBookmark = {};
   }
 
   remove(bookmark) {
     return this.bookmarksService
       .removeBookmark(bookmark)
       .then(() => this.reload());
+  }
+
+  edit(bookmark) {
+    return (this.editableBookmark = Object.assign({}, bookmark));
   }
 
   private reload() {
