@@ -1,25 +1,27 @@
 import { Component } from "@angular/core";
+import { Bookmark } from "./bookmark.model";
 import { BookmarkService } from "./bookmark.service";
 
 @Component({
-  selector: "bookmarks-app",
+  selector: "bookmark-app",
   template: `
-    <div class="panel panel-default">
-      <table class="table table-striped">
-        <tr *ngFor="let bookmark of bookmarks">
-          <td>
-            <a [href]="bookmark.url" target="_blank"> {{ bookmark.title }}</a>
-          </td>
-        </tr>
-      </table>
-    </div>
+    <bookmark-edit (save)="save($event)"></bookmark-edit>
+    <bookmark-list [bookmarks]="bookmarks"></bookmark-list>
   `,
 })
 export class AppComponent {
-  bookmarks = [];
+  bookmarks: Bookmark[];
 
   constructor(private bookmarksService: BookmarkService) {
-    this.bookmarksService
+    this.reload();
+  }
+
+  save(bookmark) {
+    this.bookmarksService.addBookmark(bookmark).then(() => this.reload());
+  }
+
+  private reload() {
+    return this.bookmarksService
       .getBookmarks()
       .then((bookmarks) => (this.bookmarks = bookmarks));
   }

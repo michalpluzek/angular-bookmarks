@@ -9,6 +9,13 @@ export class BookmarkService {
 
   constructor(private http: Http) {}
 
+  addBookmark(bookmark) {
+    const bookmarkJSON = JSON.stringify(bookmark);
+    return this.http
+      .post(`${this.baseUrl}bookmarks.json`, bookmarkJSON)
+      .toPromise();
+  }
+
   getBookmarks() {
     return this.http
       .get(`${this.baseUrl}bookmarks.json`)
