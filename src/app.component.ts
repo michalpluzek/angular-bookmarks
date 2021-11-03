@@ -7,6 +7,7 @@ import { BookmarkService } from "./bookmark.service";
     <bookmark-edit
       [bookmark]="editableBookmark"
       (save)="save($event)"
+      (clear)="clear($event)"
     ></bookmark-edit>
     <bookmark-list
       [bookmarks]="bookmarks"
@@ -29,7 +30,7 @@ export class AppComponent {
     } else {
       this.bookmarksService.addBookmark(bookmark).then(() => this.reload());
     }
-    this.editableBookmark = {};
+    this.clear();
   }
 
   remove(bookmark) {
@@ -40,6 +41,10 @@ export class AppComponent {
 
   edit(bookmark) {
     return (this.editableBookmark = Object.assign({}, bookmark));
+  }
+
+  clear() {
+    this.editableBookmark = {};
   }
 
   private reload() {
