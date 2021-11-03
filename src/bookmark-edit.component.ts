@@ -17,8 +17,14 @@ import { Component, EventEmitter, Input, Output } from "@angular/core";
           placeholder="url"
           style="width:50%"
         />
-        <button (click)="onSave()" class="btn btn-primary">Zapisz</button>
-        <button (click)="onClear()" class="btn btn-success">Wyczyść</button>
+        <button (click)="onSave()" class="btn btn-primary">
+          <span class="bi-check-lg"></span>
+          <span class="d-none d-md-inline">Zapisz</span>
+        </button>
+        <button (click)="onClear()" class="btn btn-success">
+          <span class="bi-x-lg"></span>
+          <span class="d-none d-md-inline">Wyczyść</span>
+        </button>
       </div>
     </div>
   `,

@@ -9,12 +9,17 @@ import { Component, Input, EventEmitter, Output } from "@angular/core";
           <td>
             <a [href]="bookmark.url" target="_blank"> {{ bookmark.title }}</a>
           </td>
+          <td class="d-none d-lg-table-cell">
+            {{ bookmark.url }}
+          </td>
           <td>
             <button (click)="onEdit(bookmark)" class="btn btn-warning">
-              Edytuj
+              <span class="bi-pencil"></span>
+              <span class="d-none d-md-inline">Edytuj</span>
             </button>
             <button (click)="onRemove(bookmark)" class="btn btn-danger">
-              Usuń
+              <span class="bi-trash"></span>
+              <span class="d-none d-md-inline">Usuń</span>
             </button>
           </td>
         </tr>
