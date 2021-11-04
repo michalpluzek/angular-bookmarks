@@ -7,7 +7,7 @@ import { BookmarkService } from "./bookmark.service";
     <bookmark-edit
       [bookmark]="editableBookmark"
       (save)="save($event)"
-      (clear)="clear($event)"
+      (clear)="clear()"
     ></bookmark-edit>
     <bookmark-list
       [bookmarks]="bookmarks"
