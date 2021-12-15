@@ -9,13 +9,18 @@
             </a>
           </td>
           <td>
+            <p>
+              {{ bookmark.url }}
+            </p>
+          </td>
+          <td>
             <button (click)="onEdit(bookmark)" class="btn btn-warning">
               <i-bs name="pencil"></i-bs>
               <span class="d-none d-md-inline">Edytuj</span>
             </button>
 
             <button (click)="onRemove(bookmark)" class="btn btn-danger">
-              <i-bs name="x-lg"></i-bs>
+              <i-bs name="trash"></i-bs>
               <span class="d-none d-md-inline">Usuń</span>
             </button>
           </td>
