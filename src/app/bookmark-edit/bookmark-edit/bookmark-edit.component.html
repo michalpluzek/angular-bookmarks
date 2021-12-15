@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="card-body">
+    <input
+      type="text"
+      placeholder="Tytuł"
+      style="width: 25%"
+      [(ngModel)]="bookmark.title"
+    />
+    <input
+      type="text"
+      placeholder="URL"
+      style="width: 50%"
+      [(ngModel)]="bookmark.url"
+    />
+    <button (click)="onSave()" class="btn btn-success">
+      <i-bs name="check-lg"></i-bs>
+      <span class="d-none d-md-inline">Zapisz</span>
+    </button>
+    <button (click)="onClear()" class="btn btn-primary">
+      <i-bs name="trash"></i-bs><span class="d-none d-md-inline">Wyczyść</span>
+    </button>
+  </div>
+</div>
