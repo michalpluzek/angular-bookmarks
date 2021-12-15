@@ -11,20 +11,30 @@ export class BookmarkService {
 
   constructor(private http: HttpClient) {}
 
+  errorHandler = (error: String) =>
+    console.error('BookmarkService error', error);
+
   addBookmark(bookmark: Bookmark) {
     const json = JSON.stringify(bookmark);
-    return this.http.post(`${this.baseUrl}bookmarks.json`, json).toPromise();
+    return this.http
+      .post(`${this.baseUrl}bookmarks.json`, json)
+      .toPromise()
+      .catch(this.errorHandler);
   }
 
   updateBookmark({ id, title, url }: Bookmark) {
     const json = JSON.stringify({ title, url });
     return this.http
       .patch(`${this.baseUrl}bookmarks/${id}.json`, json)
-      .toPromise();
+      .toPromise()
+      .catch(this.errorHandler);
   }
 
   removeBookmark({ id }: Bookmark) {
-    return this.http.delete(`${this.baseUrl}bookmarks/${id}.json`).toPromise();
+    return this.http
+      .delete(`${this.baseUrl}bookmarks/${id}.json`)
+      .toPromise()
+      .catch(this.errorHandler);
   }
 
   getBookmarks() {
