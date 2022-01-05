@@ -8,8 +8,8 @@ import { checkLg, pencil, trash, xLg } from 'ngx-bootstrap-icons';
 import { AppComponent } from './app.component';
 import { BookmarkService } from './service/bookmark.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { BookmarkListComponent } from './bookmark-list/bookmark-list/bookmark-list.component';
-import { BookmarkEditComponent } from './bookmark-edit/bookmark-edit/bookmark-edit.component';
+import { BookmarkListComponent } from './components/bookmark-list/bookmark-list.component';
+import { BookmarkEditComponent } from './components/bookmark-edit/bookmark-edit.component';
 
 const icons = {
   checkLg,

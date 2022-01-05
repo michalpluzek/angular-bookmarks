@@ -14,15 +14,17 @@
             </p>
           </td>
           <td>
-            <button (click)="onEdit(bookmark)" class="btn btn-warning">
-              <i-bs name="pencil"></i-bs>
-              <span class="d-none d-md-inline">Edytuj</span>
-            </button>
+            <div class="btn-group">
+              <button (click)="onEdit(bookmark)" class="btn btn-warning">
+                <i-bs name="pencil"></i-bs>
+                <span class="d-none d-md-inline">Edytuj</span>
+              </button>
 
-            <button (click)="onRemove(bookmark)" class="btn btn-danger">
-              <i-bs name="trash"></i-bs>
-              <span class="d-none d-md-inline">Usuń</span>
-            </button>
+              <button (click)="onRemove(bookmark)" class="btn btn-danger">
+                <i-bs name="trash"></i-bs>
+                <span class="d-none d-md-inline">Usuń</span>
+              </button>
+            </div>
           </td>
         </tr>
       </tbody>
