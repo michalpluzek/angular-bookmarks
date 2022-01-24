@@ -27,20 +27,29 @@ export class AppComponent {
 
   save(bookmark: Bookmark): void {
     if (bookmark.id) {
-      this.bookmarkService.updateBookmark(bookmark).then(() => this.reload());
+      this.bookmarkService.updateBookmark(bookmark).subscribe(
+        () => this.reload(),
+        (error) => this.bookmarkService.errorHandler(error)
+      );
     } else {
-      this.bookmarkService.addBookmark(bookmark).then(() => this.reload());
+      this.bookmarkService.addBookmark(bookmark).subscribe(
+        () => this.reload(),
+        (error) => this.bookmarkService.errorHandler(error)
+      );
     }
     this.clear();
   }
 
   remove(bookmark: Bookmark): void {
-    this.bookmarkService.removeBookmark(bookmark).then(() => this.reload());
+    this.bookmarkService.removeBookmark(bookmark).subscribe(
+      () => this.reload(),
+      (error) => this.bookmarkService.errorHandler(error)
+    );
   }
 
   private reload(): void {
     this.bookmarkService
       .getBookmarks()
-      .then((bookmarks) => (this.bookmarks = bookmarks));
+      .subscribe((bookmarks) => (this.bookmarks = bookmarks));
   }
 }

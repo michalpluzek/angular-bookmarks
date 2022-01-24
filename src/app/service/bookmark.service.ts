@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Bookmark } from '../model/bookmark.model';
+import { map } from 'rxjs/operators';
+import { pip } from 'ngx-bootstrap-icons';
 
 @Injectable({
   providedIn: 'root',
@@ -16,32 +18,22 @@ export class BookmarkService {
 
   addBookmark(bookmark: Bookmark) {
     const json = JSON.stringify(bookmark);
-    return this.http
-      .post(`${this.baseUrl}bookmarks.json`, json)
-      .toPromise()
-      .catch(this.errorHandler);
+    return this.http.post(`${this.baseUrl}bookmarks.json`, json);
   }
 
   updateBookmark({ id, title, url }: Bookmark) {
     const json = JSON.stringify({ title, url });
-    return this.http
-      .patch(`${this.baseUrl}bookmarks/${id}.json`, json)
-      .toPromise()
-      .catch(this.errorHandler);
+    return this.http.patch(`${this.baseUrl}bookmarks/${id}.json`, json);
   }
 
   removeBookmark({ id }: Bookmark) {
-    return this.http
-      .delete(`${this.baseUrl}bookmarks/${id}.json`)
-      .toPromise()
-      .catch(this.errorHandler);
+    return this.http.delete(`${this.baseUrl}bookmarks/${id}.json`);
   }
 
   getBookmarks() {
     return this.http
       .get(`${this.baseUrl}bookmarks.json`)
-      .toPromise()
-      .then((response) => this.convert(response));
+      .pipe(map((response) => this.convert(response)));
   }
 
   private convert(response: any) {
