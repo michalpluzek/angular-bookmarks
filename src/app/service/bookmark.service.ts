@@ -36,13 +36,16 @@ export class BookmarkService {
       .pipe(map((response) => this.convert(response)));
   }
 
-  private convert(response: any) {
-    return Object.keys(response)
-      .map((id) => ({
-        id,
-        title: response[id].title,
-        url: response[id].url,
-      }))
-      .sort((a, b) => a.title.localeCompare(b.title));
+  private convert(data: any) {
+    const convertedResponse: Bookmark[] = [];
+    for (let key in data) {
+      const newBookamrk = {
+        id: key,
+        title: data[key].title,
+        url: data[key].url,
+      };
+      convertedResponse.push(newBookamrk);
+    }
+    return convertedResponse.sort((a, b) => a.title.localeCompare(b.title));
   }
 }
