@@ -4,7 +4,7 @@
   (clear)="clear()"
 ></app-bookmark-edit>
 <app-bookmark-list
-  [bookmarks]="bookmarks"
+  [bookmarks]="bookmarks$"
   (edit)="edit($event)"
   (remove)="remove($event)"
 ></app-bookmark-list>

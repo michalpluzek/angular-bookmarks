@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Bookmark } from 'src/app/model/bookmark.model';
 
@@ -7,16 +8,18 @@ import { Bookmark } from 'src/app/model/bookmark.model';
   styleUrls: ['./bookmark-list.component.css'],
 })
 export class BookmarkListComponent {
-  @Input() bookmarks: { id?: string; url: string; title: string }[] = [];
+  @Input('bookmarks') bookmarksProps$!: Observable<Bookmark[]>;
 
-  @Output() edit: EventEmitter<Bookmark> = new EventEmitter<Bookmark>();
-  @Output() remove: EventEmitter<Bookmark> = new EventEmitter<Bookmark>();
+  @Output('edit') editEvent: EventEmitter<Bookmark> =
+    new EventEmitter<Bookmark>();
+  @Output('remove') removeEvent: EventEmitter<Bookmark> =
+    new EventEmitter<Bookmark>();
 
-  onEdit(bookmark: Bookmark) {
-    this.edit.emit(bookmark);
+  onEdit(bookmark: Bookmark): void {
+    this.editEvent.emit(bookmark);
   }
 
-  onRemove(bookmark: Bookmark) {
-    this.remove.emit(bookmark);
+  onRemove(bookmark: Bookmark): void {
+    this.removeEvent.emit(bookmark);
   }
 }

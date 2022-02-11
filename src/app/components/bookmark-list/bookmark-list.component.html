@@ -2,7 +2,7 @@
   <div class="card-body">
     <table class="table table-striped">
       <tbody>
-        <tr *ngFor="let bookmark of bookmarks">
+        <tr *ngFor="let bookmark of bookmarksProps$ | async">
           <td>
             <a [href]="bookmark.url" target="_blank">
               {{ bookmark.title }}

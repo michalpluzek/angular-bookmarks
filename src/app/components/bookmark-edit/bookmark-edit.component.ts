@@ -7,16 +7,18 @@ import { Bookmark } from 'src/app/model/bookmark.model';
   styleUrls: ['./bookmark-edit.component.css'],
 })
 export class BookmarkEditComponent {
-  @Input() bookmark: Bookmark = {} as Bookmark;
+  @Input('bookmark') bookmarkProps: Bookmark = {} as Bookmark;
 
-  @Output() clear: EventEmitter<Bookmark> = new EventEmitter<Bookmark>();
-  @Output() save: EventEmitter<Bookmark> = new EventEmitter<Bookmark>();
+  @Output('clear') clearEvent: EventEmitter<Bookmark> =
+    new EventEmitter<Bookmark>();
+  @Output('save') saveEvent: EventEmitter<Bookmark> =
+    new EventEmitter<Bookmark>();
 
   onClear(): void {
-    this.clear.emit();
+    this.clearEvent.emit();
   }
 
   onSave(): void {
-    this.save.emit(this.bookmark);
+    this.saveEvent.emit(this.bookmarkProps);
   }
 }
